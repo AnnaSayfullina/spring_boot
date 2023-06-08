@@ -22,46 +22,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository{
 
 
     @Override
-    public int getSumSalary() {
-        List<Employee> employeeList = new ArrayList<>(EMPLOYEE_LIST);
-        int sum = employeeList.stream()
-                .mapToInt(e -> e.getSalary())
-                .sum();
-        return sum;
-    }
-
-    @Override
-    public Employee getEmployeeMinSalary() {
-        List<Employee> employeeList = new ArrayList<>(EMPLOYEE_LIST);
-        Employee employee = employeeList.stream()
-                .sorted(Comparator.comparing(Employee::getSalary))
-                .findFirst()
-                .get();
-        return employee;
-    }
-
-    @Override
-    public Employee getEmployeeMaxSalary() {
-        List<Employee> employeeList = new ArrayList<>(EMPLOYEE_LIST);
-        Employee employee = employeeList.stream()
-                .sorted(Comparator.comparing(Employee::getSalary).reversed())
-                .findFirst()
-                .get();
-        return employee;
-    }
-
-    @Override
-    public List<Employee> getEmployeesHighSalary() {
-        List<Employee> employeeList = new ArrayList<>(EMPLOYEE_LIST);
-
-        double averageSalary = employeeList.stream()
-                .mapToInt(Employee::getSalary)
-                .average().orElse(0);
-
-        List<Employee> employeesHighSalary = employeeList.stream()
-                .filter(e-> e.getSalary()>averageSalary)
-                .collect(Collectors.toList());
-
-        return employeesHighSalary;
+    public List<Employee> getAllEmployees() {
+        return EMPLOYEE_LIST;
     }
 }

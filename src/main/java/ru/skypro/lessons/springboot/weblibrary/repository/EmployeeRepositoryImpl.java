@@ -3,6 +3,8 @@ package ru.skypro.lessons.springboot.weblibrary.repository;
 import org.springframework.stereotype.Repository;
 import ru.skypro.lessons.springboot.weblibrary.exceptions.EmployeeNotFoundException;
 import ru.skypro.lessons.springboot.weblibrary.model.Employee;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,13 +12,13 @@ import java.util.List;
 @Repository
 public class EmployeeRepositoryImpl implements EmployeeRepository{
 
-    private final static List<Employee> EMPLOYEE_LIST = Arrays.asList(
+    private final static List<Employee> EMPLOYEE_LIST = new ArrayList<>(Arrays.asList(
             new Employee("Anna", 150000, 1),
             new Employee("Oleg", 120000, 2),
             new Employee("Maksim", 130000, 3),
             new Employee("Timur", 180000,4),
             new Employee("Marina", 110000, 5)
-    );
+    ));
 
 
     @Override

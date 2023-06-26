@@ -1,7 +1,10 @@
 package ru.skypro.lessons.springboot.weblibrary.controller;
 
+import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import ru.skypro.lessons.springboot.weblibrary.dto.EmployeeDTO;
+import ru.skypro.lessons.springboot.weblibrary.dto.EmployeeFullInfo;
 import ru.skypro.lessons.springboot.weblibrary.model.Employee;
 import ru.skypro.lessons.springboot.weblibrary.service.EmployeeService;
 
@@ -13,40 +16,23 @@ import java.util.List;
 public class EmployeeController {
     private final EmployeeService employeeService;
 
-    @GetMapping("salary/sum")
-    public int getSumSalary(){
-        return employeeService.getSumSalary();
-    }
-
-    @GetMapping("salary/min")
-    public Employee getEmployeeMinSalary(){
-        return employeeService.getEmployeeMinSalary();
-    }
-
-    @GetMapping("salary/max")
-    public Employee getEmployeeMaxSalary(){
-        return  employeeService.getEmployeeMaxSalary();
-    }
-
-    @GetMapping("high-salary")
-    public List<Employee> getEmployeesHighSalary(){
-        return employeeService.getEmployeesHighSalary();
+    @GetMapping("/all")
+    public List<EmployeeDTO> getAllEmployees(){
+        return employeeService.getAllEmployees();
     }
 
     /**
-     * POST-запрос
-     * localhost:8080/employees/
+     * POST-запрос localhost:8080/employees/
      * Он должен создавать множество новых сотрудников;
      */
 
     @PostMapping("/")
-    public void addEmployee (@RequestBody Employee employee){
-        employeeService.addEmployee(employee);
+    public void addEmployee (@RequestBody EmployeeDTO employeeDTO){
+        employeeService.addEmployee(employeeDTO);
     }
 
     /**
-     *PUT-запрос
-     * localhost:8080/employees/{id}
+     *PUT-запрос localhost:8080/employees/{id}
      * Он должен редактировать сотрудника с указанным id;
      */
     @PutMapping("{id}")
@@ -62,7 +48,7 @@ public class EmployeeController {
      Он должен возвращать информацию о сотруднике с переданным id;
      */
     @GetMapping("{id}")
-    public Employee getEmployeeById (@PathVariable int id){
+    public EmployeeDTO getEmployeeById (@PathVariable int id){
         return employeeService.getEmployeeById(id);
     }
 
@@ -77,13 +63,44 @@ public class EmployeeController {
     }
 
     /**
-     * GET-запрос
-     * localhost:8080/employees/salaryHigherThan?salary=
-     * Он должен возвращать всех сотрудников, зарплата которых выше переданного параметра salary.
+     * GET-запрос localhost:8080/employees/withHighestSalary
+     * Он должен возвращать информацию о сотрудниках с самой высокой зарплатой в фирме;
      */
-    @GetMapping("salaryHigherThan")
-    public List<Employee> employeesSalaryHigherThan(@RequestParam("salary") int salary){
-        return employeeService.employeesSalaryHigherThan(salary);
+    @GetMapping("/withHighestSalary")
+    public EmployeeDTO getEmployeeWithHighestSalary(){
+        return employeeService.getEmployeeWithHighestSalary();
+    }
+
+    /**
+     * GET-запрос localhost:8080/employees?position=
+     * Он должен принимать на вход опциональный параметр position
+     *  и возвращать информацию о всех сотрудниках фирмы, указанной в параметре должности.
+     *  Если параметр не указан, то возвращать необходимо всех сотрудников.
+     */
+    @GetMapping("/position")
+    public List<EmployeeDTO> getEmployeesByPosition(@RequestParam(value = "position", required = false) String position) {
+        return employeeService.getEmployeesByPosition(position);
+    }
+
+    /**
+     * GET-запрос localhost:8080/employees/{id}/fullInfo
+     * Он должен возвращать полную информацию о сотруднике (имя, зарплата, название должности)
+     * с переданным в пути запроса идентификатором.
+     */
+    @GetMapping("/{id}/fullInfo")
+    public EmployeeFullInfo getEmployeeFullInfoById(@PathVariable int id){
+        return employeeService.getEmployeeFullInfoById(id);
+    }
+
+    /**
+     * GET-запрос   localhost:8080/employees/page?page=
+     Он должен возвращать информацию о сотрудниках, основываясь на номере страницы.
+     Если страница не указана, то возвращается первая страница. Номера страниц начинаются с 0.
+     Лимит на количество сотрудников на странице — 10 человек.
+     */
+    @GetMapping("/page")
+    public List<Employee> getEmployeesWithPaging(@RequestParam("page") int page){
+        return employeeService.getEmployeesWithPaging(page);
     }
 
 }

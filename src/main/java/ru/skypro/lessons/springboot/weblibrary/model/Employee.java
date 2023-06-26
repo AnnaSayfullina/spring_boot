@@ -1,18 +1,35 @@
 package ru.skypro.lessons.springboot.weblibrary.model;
 
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Objects;
 
+@Entity
+@Table(name = "employee")
 @Data
 @AllArgsConstructor
-@Getter
-@Setter
-@ToString
 public class Employee {
-    private String name;
-    private int salary;
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "salary")
+    private int salary;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_position")
+    private Position position;
+
+    public Employee() {
+    }
+
+    public Employee(String name, int salary) {
+        this.name = name;
+        this.salary = salary;
+    }
 
     @Override
     public boolean equals(Object o) {

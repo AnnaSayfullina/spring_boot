@@ -1,16 +1,23 @@
 package ru.skypro.lessons.springboot.weblibrary.service;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.lessons.springboot.weblibrary.dto.EmployeeDTO;
 import ru.skypro.lessons.springboot.weblibrary.dto.EmployeeFullInfo;
 import ru.skypro.lessons.springboot.weblibrary.exceptions.EmployeeNotFoundException;
 import ru.skypro.lessons.springboot.weblibrary.model.Employee;
 import ru.skypro.lessons.springboot.weblibrary.repository.EmployeeRepository;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -84,7 +91,7 @@ public class EmployeeServiceImpl implements EmployeeService{
         Employee employee = employeeDTO.toEmployee();
         employeeRepository.save(employee);
     }
-//
+
     @Override
     public EmployeeDTO getEmployeeById(int id) {
 
@@ -156,5 +163,26 @@ public class EmployeeServiceImpl implements EmployeeService{
 
         return pageOfEmployee.stream()
                 .toList();
+    }
+
+    @Override
+    public void uploadFileWithEmployees(MultipartFile multipartFile) {
+        File file = new File("newFile.json");
+
+        List<EmployeeDTO> employeesDTO =
+                null;
+        try {
+        Files.write(file.toPath(), multipartFile.getBytes());
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+         employeesDTO = objectMapper.readValue(multipartFile.getInputStream(),
+                    new TypeReference<>() {
+                    });
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        employeeRepository.saveAll(employeesDTO.stream().map(EmployeeDTO::toEmployee).toList());
+
     }
 }

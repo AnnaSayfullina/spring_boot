@@ -1,12 +1,10 @@
 package ru.skypro.lessons.springboot.weblibrary.controller;
 
-import io.github.classgraph.Resource;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.skypro.lessons.springboot.weblibrary.model.Report;
-import ru.skypro.lessons.springboot.weblibrary.service.EmployeeService;
 import ru.skypro.lessons.springboot.weblibrary.service.ReportService;
 
 @RestController
@@ -15,18 +13,12 @@ import ru.skypro.lessons.springboot.weblibrary.service.ReportService;
 public class ReportController {
 
     private final ReportService reportService;
-    private final EmployeeService employeeService;
-
     @PostMapping("/")
     public int createReport(){
         return reportService.createReport();
     }
-//    @GetMapping("/{id}")
-//    public Report getReportById(@PathVariable int id, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE) {
-//        return reportService.getReportById(id);
-//    }
 
-    @GetMapping(value = "/report/{id}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public ResponseEntity<Resource> getReportById(@PathVariable int id) {
         return reportService.getReportById(id);
     }

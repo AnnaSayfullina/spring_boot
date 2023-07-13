@@ -19,7 +19,7 @@ public class Report {
     private int idReport;
 
     @Lob
-    @Column(name = "report", columnDefinition = "text")
-    private String report;
+    @Column(name = "report", columnDefinition = "CLOB")
+    private byte[] report;
 
 }

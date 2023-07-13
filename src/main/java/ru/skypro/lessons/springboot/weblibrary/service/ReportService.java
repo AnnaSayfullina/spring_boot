@@ -11,6 +11,6 @@ public interface ReportService {
 
 //    ReportDTO getReportById(int id);
     int createReport();
-    Report getReportById(int id);
+    ResponseEntity<Resource> getReportById(int id);
 
 }

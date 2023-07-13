@@ -2,6 +2,7 @@ package ru.skypro.lessons.springboot.weblibrary.controller;
 
 import io.github.classgraph.Resource;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.skypro.lessons.springboot.weblibrary.model.Report;
@@ -20,14 +21,14 @@ public class ReportController {
     public int createReport(){
         return reportService.createReport();
     }
-    @GetMapping("/{id}")
-    public Report getReportById(@PathVariable int id) {
-        return reportService.getReportById(id);
-    }
-
 //    @GetMapping("/{id}")
-//    public ResponseEntity<Resource> getReportById(@PathVariable int id) {
+//    public Report getReportById(@PathVariable int id, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE) {
 //        return reportService.getReportById(id);
 //    }
+
+    @GetMapping(value = "/report/{id}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    public ResponseEntity<Resource> getReportById(@PathVariable int id) {
+        return reportService.getReportById(id);
+    }
 
 }

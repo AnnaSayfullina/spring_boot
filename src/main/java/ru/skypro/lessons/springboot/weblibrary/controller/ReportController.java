@@ -23,4 +23,14 @@ public class ReportController {
         return reportService.getReportById(id);
     }
 
+    @PostMapping("/path")
+    public int createReportWihPath(){
+        return reportService.createReportWihPath();
+    }
+
+    @GetMapping(value = "/path/{id}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    public ResponseEntity<Resource> getReportByIdWihPath(@PathVariable int id) {
+        return reportService.getReportByIdWihPath(id);
+    }
+
 }

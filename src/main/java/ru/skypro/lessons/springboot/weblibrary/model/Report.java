@@ -22,4 +22,7 @@ public class Report {
     @Column(name = "report", columnDefinition = "text")
     private String report;
 
+    @Column(name = "path")
+    private String path;
+
 }

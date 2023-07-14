@@ -9,5 +9,7 @@ public interface ReportService {
 
     int createReport();
     ResponseEntity<Resource> getReportById(int id);
+    int createReportWihPath();
+    ResponseEntity<Resource> getReportByIdWihPath(int id);
 
 }

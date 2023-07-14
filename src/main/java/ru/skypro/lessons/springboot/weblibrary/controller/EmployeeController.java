@@ -2,12 +2,16 @@ package ru.skypro.lessons.springboot.weblibrary.controller;
 
 import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.lessons.springboot.weblibrary.dto.EmployeeDTO;
 import ru.skypro.lessons.springboot.weblibrary.dto.EmployeeFullInfo;
 import ru.skypro.lessons.springboot.weblibrary.model.Employee;
 import ru.skypro.lessons.springboot.weblibrary.service.EmployeeService;
 
+import javax.print.attribute.standard.Media;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -101,6 +105,16 @@ public class EmployeeController {
     @GetMapping("/page")
     public List<Employee> getEmployeesWithPaging(@RequestParam("page") int page){
         return employeeService.getEmployeesWithPaging(page);
+    }
+
+    /**
+     * POST-запрос localhost:8080/employees/upload.
+     * Он должен принимать на вход файл JSON, содержащий список сотрудников в JSON-формате.
+     * Все сотрудники из загружаемого файла должны быть сохранены в базе данных.
+     */
+    @PostMapping(value = "/upload",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public void uploadFileWithEmployees(@RequestParam("file")MultipartFile multipartFile) throws IOException {
+        employeeService.uploadFileWithEmployees(multipartFile);
     }
 
 }

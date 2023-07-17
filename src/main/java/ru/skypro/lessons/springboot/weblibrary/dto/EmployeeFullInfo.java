@@ -3,9 +3,11 @@ package ru.skypro.lessons.springboot.weblibrary.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
-public class EmployeeFullInfo {
+public class EmployeeFullInfo implements Serializable {
     private String name;
     private Integer salary;
     private String positionName;

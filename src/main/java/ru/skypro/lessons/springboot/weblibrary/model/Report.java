@@ -19,10 +19,8 @@ public class Report {
     private int idReport;
 
     @Lob
-    @Column(name = "report", columnDefinition = "text")
-    private String report;
-
-    @Column(name = "path")
+    @Column(name = "path", columnDefinition = "text")
     private String path;
+
 
 }

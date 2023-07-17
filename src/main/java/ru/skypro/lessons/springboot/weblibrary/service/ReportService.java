@@ -7,9 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface ReportService {
 
-    int createReport();
-    ResponseEntity<Resource> getReportById(int id);
     int createReportWihPath();
-    ResponseEntity<Resource> getReportByIdWihPath(int id);
+    Resource getReportByIdWihPath(int id);
 
 }

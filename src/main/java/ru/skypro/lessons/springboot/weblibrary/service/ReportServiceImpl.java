@@ -26,39 +26,6 @@ public class ReportServiceImpl implements ReportService{
 
     private  final ReportRepository reportRepository;
 
-    @Override
-    public int createReport(){
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        String json = null;
-        try {
-            json = objectMapper.writeValueAsString(reportRepository.createReport());
-        } catch (JsonProcessingException e) {
-            throw new IllegalStateException("Отчет не сформирован", e);
-        }
-
-        Report report = new Report();
-        report.setReport(json);
-        return reportRepository.save(report).getIdReport();
-
-    }
-
-
-    @Override
-    public ResponseEntity<Resource> getReportById(int id) {
-        String fileName = "employeeReport";
-        Resource resource =
-                new ByteArrayResource(reportRepository.findById(id)
-                        .orElseThrow(ReportNotFoundException::new)
-                        .getReport()
-                        .getBytes(StandardCharsets.UTF_8));
-
-            return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + id + ".json\"")
-                    .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                    .body(resource);
-
-    }
 
     @Override
     public int createReportWihPath() {
@@ -74,27 +41,24 @@ public class ReportServiceImpl implements ReportService{
             throw new RuntimeException(e);
         }
         Report report = new Report();
-        report.setReport(file);
         report.setPath(path.toString());
         return reportRepository.save(report).getIdReport();
     }
 
     @Override
-    public ResponseEntity<Resource> getReportByIdWihPath(int id) {
+    public Resource getReportByIdWihPath(int id) {
 
         Path path = Paths.get(reportRepository.findById(id)
                         .orElseThrow(ReportNotFoundException::new)
                                 .getPath());
         try {
+            byte[] bytes = Files.readAllBytes(path);
+            Resource resource = new ByteArrayResource(bytes);
 
-            String file = Files.lines(path)
-                    .collect(Collectors.joining());
-            String fileName = "employeeReport";
-            Resource resource = new ByteArrayResource(file.getBytes(StandardCharsets.UTF_8));
-            return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + id + ".json\"")
-                    .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                    .body(resource);
+//            String file = Files.lines(path)
+//                    .collect(Collectors.joining());
+//            return new ByteArrayResource(file.getBytes(StandardCharsets.UTF_8));
+            return resource;
         } catch (IOException ioException) {
             ioException.getCause();
             return null;

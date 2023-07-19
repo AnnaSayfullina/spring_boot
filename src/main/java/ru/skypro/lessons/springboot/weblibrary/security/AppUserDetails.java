@@ -4,30 +4,25 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-import ru.skypro.lessons.springboot.weblibrary.dto.AuthUserDTO;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 @Component
-public class SecurityUserPrincipal implements UserDetails {
+public class AppUserDetails implements UserDetails {
 
-    private AuthUserDTO authUserDTO;
+    private AppUserDTO userDetails;
 
-    public SecurityUserPrincipal() {
-    }
-
-    public SecurityUserPrincipal(AuthUserDTO authUserDTO) {
-        this.authUserDTO = authUserDTO;
-    }
-
-    public void setUserDetails(AuthUserDTO authUserDTO) {
-        this.authUserDTO = authUserDTO;
+    public void setUserDetails(AppUserDTO userDetails) {
+        this.userDetails = userDetails;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Optional.ofNullable(authUserDTO)
-                .map(AuthUserDTO::getRole)
+        return Optional.ofNullable(userDetails)
+                .map(AppUserDTO::getRole)
                 .map(role -> "ROLE_" + role)
                 .map(SimpleGrantedAuthority::new)
                 .map(List::of)
@@ -36,12 +31,16 @@ public class SecurityUserPrincipal implements UserDetails {
 
     @Override
     public String getPassword() {
-        return authUserDTO.getPassword();
+        return Optional.ofNullable(userDetails)
+                .map(AppUserDTO::getPassword)
+                .orElse(null);
     }
 
     @Override
     public String getUsername() {
-        return authUserDTO.getUsername();
+        return Optional.ofNullable(userDetails)
+                .map(AppUserDTO::getUsername)
+                .orElse(null);
     }
 
     @Override
@@ -61,10 +60,6 @@ public class SecurityUserPrincipal implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        if (authUserDTO.getEnabled() == 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return true;
     }
 }

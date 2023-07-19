@@ -19,10 +19,13 @@ CREATE TABLE report(
 );
 
 DROP TABLE auth_user;
+DROP TABLE authorities;
+
 
 SELECT * FROM report;
 
-INSERT INTO auth_user (enabled, password, role, username) VALUES
-                                                              (1,'$2a$10$OFLR.7KU689uojrbyMlviOTPj1bAjoiNcYnA.SfCQPumcNPw5glpu', 'ADMIN', 'admin1');
+INSERT INTO app_user (password, role, username) VALUES
+                                                              ('$2a$10$OFLR.7KU689uojrbyMlviOTPj1bAjoiNcYnA.SfCQPumcNPw5glpu', 'ADMIN', 'admin'),
+                                                              ('$2a$10$6Lhfl4UV9mZtnIuNtbc3BuAXAngFA6n1oIsQCWeO0FKXmrMAdyLH6', 'USER', 'user');
 
 

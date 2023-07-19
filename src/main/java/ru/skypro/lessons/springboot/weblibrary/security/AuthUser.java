@@ -11,18 +11,25 @@ import java.util.List;
 public class AuthUser {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @Column(nullable = false, unique = true)
     private String username;
 
+    @Column (nullable = false)
     private String password;
 
+    private int enabled;
+
+    @Enumerated(EnumType.STRING)
+    @Column (nullable = false)
+    private Role role;
+
 //    private boolean isEnabled;
-    @JoinColumn (name = "user_id")
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<Authority> authorityList;
+//    @JoinColumn (name = "user_id")
+//    @OneToMany(fetch = FetchType.EAGER)
+//    private List<Authority> authorityList;
 
 
 }

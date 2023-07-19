@@ -1,39 +1,47 @@
 package ru.skypro.lessons.springboot.weblibrary.security;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
+import ru.skypro.lessons.springboot.weblibrary.dto.AuthUserDTO;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
+@Component
 public class SecurityUserPrincipal implements UserDetails {
 
-    private String userName;
-    private String password;
-    private List<SecurityGrantedAthorities> athoritiesList;
+    private AuthUserDTO authUserDTO;
 
-    public SecurityUserPrincipal(AuthUser user) {
-        this.userName = user.getUsername();
-        this.password = user.getPassword();
-        this.athoritiesList = user.getAuthorityList().stream()
-                .map(SecurityGrantedAthorities::new)
-                .toList();
+    public SecurityUserPrincipal() {
+    }
+
+    public SecurityUserPrincipal(AuthUserDTO authUserDTO) {
+        this.authUserDTO = authUserDTO;
+    }
+
+    public void setUserDetails(AuthUserDTO authUserDTO) {
+        this.authUserDTO = authUserDTO;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return new ArrayList<>(athoritiesList);
+        return Optional.ofNullable(authUserDTO)
+                .map(AuthUserDTO::getRole)
+                .map(role -> "ROLE_" + role)
+                .map(SimpleGrantedAuthority::new)
+                .map(List::of)
+                .orElse(Collections.emptyList());
     }
 
     @Override
     public String getPassword() {
-        return password;
+        return authUserDTO.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return userName;
+        return authUserDTO.getUsername();
     }
 
     @Override
@@ -53,6 +61,10 @@ public class SecurityUserPrincipal implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        if (authUserDTO.getEnabled() == 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

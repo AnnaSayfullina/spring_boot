@@ -1,19 +1,21 @@
 package ru.skypro.lessons.springboot.weblibrary.security;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 
+@Entity
+@Table(name = "authorities")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class SecurityGrantedAthorities implements GrantedAuthority {
-    private String role;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String authority;
 
-
-    public SecurityGrantedAthorities(Authority authority) {
-        this.role = authority.getRole();
-
-
-    }
-
-    @Override
-    public String getAuthority() {
-        return this.role;
-    }
 }

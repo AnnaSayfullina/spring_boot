@@ -18,8 +18,11 @@ CREATE TABLE report(
     report VARCHAR NOT NULL
 );
 
-DROP TABLE report;
+DROP TABLE auth_user;
 
 SELECT * FROM report;
+
+INSERT INTO auth_user (enabled, password, role, username) VALUES
+                                                              (1,'$2a$10$OFLR.7KU689uojrbyMlviOTPj1bAjoiNcYnA.SfCQPumcNPw5glpu', 'ADMIN', 'admin1');
 
 

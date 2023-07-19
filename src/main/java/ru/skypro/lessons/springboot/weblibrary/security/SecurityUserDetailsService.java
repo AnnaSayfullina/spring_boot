@@ -6,20 +6,29 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
+import ru.skypro.lessons.springboot.weblibrary.dto.AuthUserDTO;
 
 @Component
-@RequiredArgsConstructor
 public class SecurityUserDetailsService implements UserDetailsService {
 
-    @Autowired
     private UserRepository userRepository;
+    private SecurityUserPrincipal userPrincipal;
+
+    public SecurityUserDetailsService(UserRepository userRepository, SecurityUserPrincipal userPrincipal) {
+        this.userRepository = userRepository;
+        this.userPrincipal = userPrincipal;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) {
-         AuthUser user = userRepository.findByUsername(username);
-        if (user == null) {
+
+        AuthUser authUser = userRepository.findByUsername(username);
+
+        if (authUser == null) {
             throw new UsernameNotFoundException(username);
         }
-        return new SecurityUserPrincipal(user);
+        AuthUserDTO userDTO = AuthUserDTO.fromAuthUser(authUser);
+        return new SecurityUserPrincipal(userDTO);
     }
+
 }

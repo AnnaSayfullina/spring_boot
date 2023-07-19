@@ -60,11 +60,11 @@ public class SecurityConfig {
 
     private void customizeRequest(AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry registry) {
         try {
-            registry.requestMatchers(HttpMethod.POST,"/employee/**", "/report/**")
+            registry.requestMatchers(HttpMethod.POST,"/employees/**", "/report/**")
                     .hasRole(Role.ADMIN.name())
-                    .requestMatchers(HttpMethod.PUT, "/employee/**").hasRole(Role.ADMIN.name())
-                    .requestMatchers(HttpMethod.DELETE, "/employee/**").hasRole(Role.ADMIN.name())
-                    .requestMatchers(HttpMethod.GET, "/employee/**", "/report/**")
+                    .requestMatchers(HttpMethod.PUT, "/employees/**").hasRole(Role.ADMIN.name())
+                    .requestMatchers(HttpMethod.DELETE, "/employees/**").hasRole(Role.ADMIN.name())
+                    .requestMatchers(HttpMethod.GET, "/employees/**", "/report/**")
                     .hasAnyRole(Role.ADMIN.name(), Role.USER.name())
                     .requestMatchers("/**").permitAll();
         } catch (Exception e) {

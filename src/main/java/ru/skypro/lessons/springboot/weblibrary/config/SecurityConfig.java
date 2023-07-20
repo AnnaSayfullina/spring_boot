@@ -54,16 +54,30 @@ public class SecurityConfig {
                 .sessionManagement(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults())
                 .authorizeHttpRequests(
-                        matcherRegistry ->
-                                matcherRegistry
-                                        .requestMatchers(HttpMethod.POST,"/employees/**", "/report/**")
-                    .hasRole(Role.ADMIN.name())
-                    .requestMatchers(HttpMethod.PUT, "/employees/**").hasRole(Role.ADMIN.name())
-                    .requestMatchers(HttpMethod.DELETE, "/employees/**").hasRole(Role.ADMIN.name())
-                    .requestMatchers(HttpMethod.GET, "/employees/**", "/report/**")
-                    .hasAnyRole(Role.ADMIN.name(), Role.USER.name())
-                    .requestMatchers("/**").permitAll())
+                        registry ->
+                                registry.requestMatchers(new AntPathRequestMatcher("/admin/**")).hasAnyRole(Role.ADMIN.name())
+                                        .requestMatchers(new AntPathRequestMatcher("/**")).hasAnyRole(Role.USER.name(), Role.ADMIN.name())
+                )
                 .build();
+
+        //Почему с эти кодом не работает? Выдает 404 ошибку
+
+       //        return http.csrf(AbstractHttpConfigurer::disable)
+//                .formLogin(Customizer.withDefaults())
+//                .logout(Customizer.withDefaults())
+//                .sessionManagement(Customizer.withDefaults())
+//                .httpBasic(Customizer.withDefaults())
+//                .authorizeHttpRequests(
+//                        matcherRegistry ->
+//                                matcherRegistry
+//                                        .requestMatchers(HttpMethod.POST,"/employees/**", "/report/**")
+//                    .hasRole(Role.ADMIN.name())
+//                    .requestMatchers(HttpMethod.PUT, "/employees/**").hasRole(Role.ADMIN.name())
+//                    .requestMatchers(HttpMethod.DELETE, "/employees/**").hasRole(Role.ADMIN.name())
+//                    .requestMatchers(HttpMethod.GET, "/employees/**", "/report/**")
+//                    .hasAnyRole(Role.ADMIN.name(), Role.USER.name())
+//                    .requestMatchers("/**").permitAll())
+//                .build();
     }
 
     @Bean

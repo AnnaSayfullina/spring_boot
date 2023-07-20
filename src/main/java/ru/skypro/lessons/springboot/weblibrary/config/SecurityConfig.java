@@ -48,36 +48,23 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http.csrf(AbstractHttpConfigurer::disable)
+               return http.csrf(AbstractHttpConfigurer::disable)
                 .formLogin(Customizer.withDefaults())
                 .logout(Customizer.withDefaults())
                 .sessionManagement(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults())
                 .authorizeHttpRequests(
-                        registry ->
-                                registry.requestMatchers(new AntPathRequestMatcher("/admin/**")).hasAnyRole(Role.ADMIN.name())
-                                        .requestMatchers(new AntPathRequestMatcher("/**")).hasAnyRole(Role.USER.name(), Role.ADMIN.name())
-                )
+                        matcherRegistry ->
+                                matcherRegistry
+                                        .requestMatchers(HttpMethod.POST, "/employees/**", "/report/**")
+                    .hasRole(Role.ADMIN.name())
+                    .requestMatchers(HttpMethod.PUT, "/employees/**").hasRole(Role.ADMIN.name())
+                    .requestMatchers(HttpMethod.DELETE, "/employees/**").hasRole(Role.ADMIN.name())
+                    .requestMatchers(HttpMethod.GET, "/employees/**", "/report/**")
+                    .hasAnyRole(Role.ADMIN.name(), Role.USER.name())
+                    .requestMatchers("/**").hasAnyRole(Role.ADMIN.name(), Role.USER.name())
+                    )
                 .build();
-
-        //Почему с эти кодом не работает? Выдает 404 ошибку
-
-       //        return http.csrf(AbstractHttpConfigurer::disable)
-//                .formLogin(Customizer.withDefaults())
-//                .logout(Customizer.withDefaults())
-//                .sessionManagement(Customizer.withDefaults())
-//                .httpBasic(Customizer.withDefaults())
-//                .authorizeHttpRequests(
-//                        matcherRegistry ->
-//                                matcherRegistry
-//                                        .requestMatchers(HttpMethod.POST,"/employees/**", "/report/**")
-//                    .hasRole(Role.ADMIN.name())
-//                    .requestMatchers(HttpMethod.PUT, "/employees/**").hasRole(Role.ADMIN.name())
-//                    .requestMatchers(HttpMethod.DELETE, "/employees/**").hasRole(Role.ADMIN.name())
-//                    .requestMatchers(HttpMethod.GET, "/employees/**", "/report/**")
-//                    .hasAnyRole(Role.ADMIN.name(), Role.USER.name())
-//                    .requestMatchers("/**").permitAll())
-//                .build();
     }
 
     @Bean

@@ -1,6 +1,5 @@
 package ru.skypro.lessons.springboot.weblibrary.controller;
 
-import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -9,8 +8,6 @@ import ru.skypro.lessons.springboot.weblibrary.dto.EmployeeDTO;
 import ru.skypro.lessons.springboot.weblibrary.dto.EmployeeFullInfo;
 import ru.skypro.lessons.springboot.weblibrary.model.Employee;
 import ru.skypro.lessons.springboot.weblibrary.service.EmployeeService;
-
-import javax.print.attribute.standard.Media;
 import java.io.IOException;
 import java.util.List;
 
@@ -25,27 +22,27 @@ public class EmployeeController {
         return employeeService.getAllEmployees();
     }
 
-//    /**
-//     * POST-запрос localhost:8080/employees/
-//     * Он должен создавать множество новых сотрудников;
-//     */
+    /**
+     * POST-запрос localhost:8080/employees/
+     * Он должен создавать множество новых сотрудников;
+     */
 
-//    @PostMapping("/")
-//    public void addEmployee (@RequestBody EmployeeDTO employeeDTO){
-//        employeeService.addEmployee(employeeDTO);
-//    }
-//
-//    /**
-//     *PUT-запрос localhost:8080/employees/{id}
-//     * Он должен редактировать сотрудника с указанным id;
-//     */
-//    @PutMapping("{id}")
-//    public void editEmployee(@RequestParam (value = "name", required = false) String name,
-//                             @RequestParam (value = "salary", required = false) Integer salary,
-//                             @PathVariable("id") int id ) {
-//        employeeService.editEmployee(name, salary, id);
-//    }
-//
+    @PostMapping("/")
+    public void addEmployee (@RequestBody EmployeeDTO employeeDTO){
+        employeeService.addEmployee(employeeDTO);
+    }
+
+    /**
+     *PUT-запрос localhost:8080/employees/{id}
+     * Он должен редактировать сотрудника с указанным id;
+     */
+    @PutMapping("{id}")
+    public void editEmployee(@RequestParam (value = "name", required = false) String name,
+                             @RequestParam (value = "salary", required = false) Integer salary,
+                             @PathVariable("id") int id ) {
+        employeeService.editEmployee(name, salary, id);
+    }
+
     /**
      GET-запрос
      localhost:8080/employees/{id}
@@ -55,17 +52,17 @@ public class EmployeeController {
     public EmployeeDTO getEmployeeById (@PathVariable int id){
         return employeeService.getEmployeeById(id);
     }
-//
-//    /**
-//     * DELETE-запрос
-//     * localhost:8080/employees/{id}
-//     * Он должен удалять сотрудника с переданным id;
-//     */
-//    @DeleteMapping("{id}")
-//    public void deleteEmployeeById (@PathVariable int id){
-//        employeeService.deleteEmployeeById(id);
-//    }
-//
+
+    /**
+     * DELETE-запрос
+     * localhost:8080/employees/{id}
+     * Он должен удалять сотрудника с переданным id;
+     */
+    @DeleteMapping("{id}")
+    public void deleteEmployeeById (@PathVariable int id){
+        employeeService.deleteEmployeeById(id);
+    }
+
     /**
      * GET-запрос localhost:8080/employees/withHighestSalary
      * Он должен возвращать информацию о сотрудниках с самой высокой зарплатой в фирме;
@@ -95,7 +92,7 @@ public class EmployeeController {
     public EmployeeFullInfo getEmployeeFullInfoById(@PathVariable int id){
         return employeeService.getEmployeeFullInfoById(id);
     }
-//
+
     /**
      * GET-запрос   localhost:8080/employees/page?page=
      Он должен возвращать информацию о сотрудниках, основываясь на номере страницы.
@@ -106,15 +103,15 @@ public class EmployeeController {
     public List<Employee> getEmployeesWithPaging(@RequestParam("page") int page){
         return employeeService.getEmployeesWithPaging(page);
     }
-//
-//    /**
-//     * POST-запрос localhost:8080/employees/upload.
-//     * Он должен принимать на вход файл JSON, содержащий список сотрудников в JSON-формате.
-//     * Все сотрудники из загружаемого файла должны быть сохранены в базе данных.
-//     */
-//    @PostMapping(value = "/upload",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-//    public void uploadFileWithEmployees(@RequestParam("file")MultipartFile multipartFile) throws IOException {
-//        employeeService.uploadFileWithEmployees(multipartFile);
-//    }
+
+    /**
+     * POST-запрос localhost:8080/employees/upload.
+     * Он должен принимать на вход файл JSON, содержащий список сотрудников в JSON-формате.
+     * Все сотрудники из загружаемого файла должны быть сохранены в базе данных.
+     */
+    @PostMapping(value = "/upload",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public void uploadFileWithEmployees(@RequestParam("file")MultipartFile multipartFile) throws IOException {
+        employeeService.uploadFileWithEmployees(multipartFile);
+    }
 
 }

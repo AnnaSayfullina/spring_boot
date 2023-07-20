@@ -48,28 +48,22 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable)
+        return http.csrf(AbstractHttpConfigurer::disable)
                 .formLogin(Customizer.withDefaults())
                 .logout(Customizer.withDefaults())
                 .sessionManagement(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults())
-                .authorizeHttpRequests(this::customizeRequest);
-
-        return http.build();
-    }
-
-    private void customizeRequest(AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry registry) {
-        try {
-            registry.requestMatchers(HttpMethod.POST,"/employees/**", "/report/**")
+                .authorizeHttpRequests(
+                        matcherRegistry ->
+                                matcherRegistry
+                                        .requestMatchers(HttpMethod.POST,"/employees/**", "/report/**")
                     .hasRole(Role.ADMIN.name())
                     .requestMatchers(HttpMethod.PUT, "/employees/**").hasRole(Role.ADMIN.name())
                     .requestMatchers(HttpMethod.DELETE, "/employees/**").hasRole(Role.ADMIN.name())
                     .requestMatchers(HttpMethod.GET, "/employees/**", "/report/**")
                     .hasAnyRole(Role.ADMIN.name(), Role.USER.name())
-                    .requestMatchers("/**").permitAll();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+                    .requestMatchers("/**").permitAll())
+                .build();
     }
 
     @Bean

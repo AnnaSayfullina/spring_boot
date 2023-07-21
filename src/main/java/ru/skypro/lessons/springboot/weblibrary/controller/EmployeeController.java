@@ -1,6 +1,5 @@
 package ru.skypro.lessons.springboot.weblibrary.controller;
 
-import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -9,8 +8,6 @@ import ru.skypro.lessons.springboot.weblibrary.dto.EmployeeDTO;
 import ru.skypro.lessons.springboot.weblibrary.dto.EmployeeFullInfo;
 import ru.skypro.lessons.springboot.weblibrary.model.Employee;
 import ru.skypro.lessons.springboot.weblibrary.service.EmployeeService;
-
-import javax.print.attribute.standard.Media;
 import java.io.IOException;
 import java.util.List;
 

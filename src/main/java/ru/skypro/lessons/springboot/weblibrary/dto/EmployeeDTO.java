@@ -29,4 +29,13 @@ public class EmployeeDTO implements Serializable {
         employee.setSalary(this.getSalary());
         return employee;
     }
+
+    @Override
+    public String toString() {
+        return "EmployeeDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", salary=" + salary +
+                '}';
+    }
 }

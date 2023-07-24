@@ -1,10 +1,1 @@
-01:55:35.146 [http-nio-8090-exec-5] INFO  r.s.l.s.w.s.EmployeeServiceImpl - Вызван метод получения сотрудника по id = 2
-01:55:35.197 [http-nio-8090-exec-5] DEBUG r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник EmployeeDTO{id=2, name='Oleg', salary=15000} найден
-01:57:29.668 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 19 mappings in 'requestMappingHandlerMapping'
-01:57:29.962 [main] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
-01:57:30.026 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-01:57:30.051 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 2 @ExceptionHandler, 1 ResponseBodyAdvice
-14:54:45.830 [http-nio-8090-exec-5] INFO  r.s.l.s.w.s.EmployeeServiceImpl - Вызван метод получения сотрудника по id = 4
-14:54:45.863 [http-nio-8090-exec-5] ERROR r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник с id = 4 не найден
-14:54:55.347 [http-nio-8090-exec-8] INFO  r.s.l.s.w.s.EmployeeServiceImpl - Вызван метод получения сотрудника по id = 6
-14:54:55.373 [http-nio-8090-exec-8] DEBUG r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник EmployeeDTO{id=6, name='Alex123', salary=199000} найден
+16:34:52.913 [http-nio-8090-exec-4] ERROR r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник с id = 1 не найден

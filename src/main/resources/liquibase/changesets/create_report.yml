@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: 3
+      author: Anna
+      changes:
+        - createTable:
+            tableName: report
+            columns:
+              - column:
+                  name: id_report
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: path
+                  type: text
+                  constraints:
+                    nullable: false

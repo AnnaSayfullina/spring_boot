@@ -18,8 +18,10 @@ CREATE TABLE report(
     report VARCHAR NOT NULL
 );
 
-DROP TABLE auth_user;
-DROP TABLE authorities;
+DROP TABLE employee;
+DROP TABLE position;
+DROP TABLE report;
+DROP TABLE app_user;
 
 
 SELECT * FROM report;

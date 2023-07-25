@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: 4
+      author: Anna
+      changes:
+        - createTable:
+            tableName: app_user
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: username
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: password
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role
+                  type: varchar(255)
+                  constraints:
+                    nullable: false

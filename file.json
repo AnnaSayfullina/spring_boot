@@ -1,1 +1,1 @@
-[{"namePosition":"бухгалтер","countOfEmployee":3,"maxSalary":150000000,"minSalary":199000,"averageSalary":5.0132666666666664E7},{"namePosition":"директор","countOfEmployee":2,"maxSalary":92000,"minSalary":15000,"averageSalary":53500.0}]
+[{"namePosition":"директор","countOfEmployee":1,"maxSalary":100000,"minSalary":100000,"averageSalary":100000.0},{"namePosition":"дворник","countOfEmployee":3,"maxSalary":150000,"minSalary":15000,"averageSalary":71666.66666666667}]

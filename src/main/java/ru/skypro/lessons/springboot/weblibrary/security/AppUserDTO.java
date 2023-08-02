@@ -21,7 +21,6 @@ public class AppUserDTO {
         appUserDTO.setId(appUser.getId());
         appUserDTO.setUsername(appUser.getUsername());
         appUserDTO.setPassword(appUser.getPassword());
-//        appUserDTO.setEnabled(appUser.getEnabled());
         appUserDTO.setRole(appUser.getRole());
         return appUserDTO;
     }
@@ -31,7 +30,6 @@ public class AppUserDTO {
         appUser.setId(this.getId());
         appUser.setUsername(this.getUsername());
         appUser.setPassword(this.getPassword());
-//        appUser.setEnabled(this.getEnabled());
         appUser.setRole(this.getRole());
         return appUser;
     }

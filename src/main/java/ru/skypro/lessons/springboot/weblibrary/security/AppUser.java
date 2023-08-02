@@ -2,6 +2,7 @@ package ru.skypro.lessons.springboot.weblibrary.security;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.apache.commons.lang3.StringUtils;
 
 @Entity
 @Table(name = "app_user")
@@ -18,4 +19,17 @@ public class AppUser {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
+
+    public AppUser() {
+    }
+
+    public AppUser(String username, String password, Role role) {
+        this.username = correctUsername(username);
+        this.password = password;
+        this.role = role;
+    }
+
+    public String correctUsername(String username){
+        return StringUtils.capitalize(username.toLowerCase());
+    }
 }

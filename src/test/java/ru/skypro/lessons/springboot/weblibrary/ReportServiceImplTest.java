@@ -8,6 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.core.io.Resource;
 import ru.skypro.lessons.springboot.weblibrary.dto.ReportDTO;
 import ru.skypro.lessons.springboot.weblibrary.exceptions.ReportNotFoundException;
 import ru.skypro.lessons.springboot.weblibrary.model.Report;
@@ -64,23 +65,25 @@ public class ReportServiceImplTest {
         verify(mockedReportRepository, times(1)).save(report);
     }
 
+//    Верно ли переделаны метод?
     @DisplayName("Получения отчета по id")
     @Test
-    public void getReportByIdWihPath_Ok(){
+    public void getReportByIdWihPath_Ok() {
+
+        Report expected = REPORT;
 
         when(mockedReportRepository.findById(1))
-                .thenReturn(Optional.ofNullable(REPORT));
+                .thenReturn(Optional.of(expected));
 
-        Optional<Report> report = mockedReportRepository.findById(1);
-
-        assertEquals("path", report.get().getPath());
+        out.getReportByIdWihPath(1);
+        verify(mockedReportRepository, times(1)).findById(1);
     }
 
     @DisplayName("Отчета по id не найден")
     @Test
     public void getReportByIdWihPath_Exception(){
         when(mockedReportRepository.findById(1)).thenThrow(ReportNotFoundException.class);
-        assertThrows(ReportNotFoundException.class, () -> mockedReportRepository.findById(1));
+        assertThrows(ReportNotFoundException.class, () -> out.getReportByIdWihPath(1));
 
     }
 }

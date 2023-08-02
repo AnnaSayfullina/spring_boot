@@ -22,11 +22,7 @@ import ru.skypro.lessons.springboot.weblibrary.model.Position;
 import ru.skypro.lessons.springboot.weblibrary.repository.EmployeeRepository;
 import ru.skypro.lessons.springboot.weblibrary.service.EmployeeServiceImpl;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -34,7 +30,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -80,44 +75,49 @@ public class EmployeeServiceImplTest {
     @DisplayName("Изменение сотрудника в БД")
     @Test
     public void editEmployee_OK(){
-        Employee expectedEmployee = new Employee(1,"Anna", 200000, DIRECTOR);
+        Employee employee = new Employee(1,"Oleg", 100000, DIRECTOR);
+        Employee expected = new Employee(1,"Anna", 200000, DIRECTOR);
 
-        List<Employee>  employeeList= getListEmployeesForTest();
-        Employee actualEmployee = new Employee();
-        for (Employee employee : employeeList){
-            if (expectedEmployee.getId()==employee.getId()){
-                actualEmployee.setId(expectedEmployee.getId());
-                actualEmployee.setName(expectedEmployee.getName());
-                actualEmployee.setSalary(expectedEmployee.getSalary());
-                actualEmployee.setPosition(expectedEmployee.getPosition());
-            }
-        }
-        assertEquals(expectedEmployee, actualEmployee);
+        when(mockedRepository.findById(1))
+                .thenReturn(Optional.of(employee));
+
+        Employee actual = out.getEmployeeById(1).toEmployee();
+        out.editEmployee(expected.getName(), expected.getSalary(), expected.getId());
+
+        assertEquals(expected, actual);
     }
 
 
     @DisplayName("Поиск сотрудника в БД по id")
     @Test
     public void getEmployeeById_OK(){
-        mockedRepository.findById(1);
-        verify(mockedRepository, times(1)).findById(1);
+        Employee expected = new Employee(1,"Oleg", 100000, DIRECTOR);
+
+        when(mockedRepository.findById(1))
+                .thenReturn(Optional.of(expected));
+
+        Employee actual = out.getEmployeeById(1).toEmployee();
+        assertEquals(expected, actual);
+
     }
 
     @DisplayName("Сотрудник в БД по id не найден")
     @Test
     public void getEmployeeById_Exception(){
         when(mockedRepository.findById(2)).thenThrow(EmployeeNotFoundException.class);
-        assertThrows(EmployeeNotFoundException.class, () -> mockedRepository.findById(2));
+        assertThrows(EmployeeNotFoundException.class, () -> out.getEmployeeById(2));
     }
 
     @DisplayName("Удаление сотрудника в БД по id")
     @Test
     public void deleteEmployeeById_OK(){
-        mockedRepository.deleteById(1);
+        Employee employee = new Employee(1,"Oleg", 100000, DIRECTOR);
+
+        when(mockedRepository.findById(1)).thenReturn(Optional.of(employee));
+        out.deleteEmployeeById(1);
         verify(mockedRepository, times(1)).deleteById(1);
     }
 
-//    не уверена, что так правильно
     @DisplayName("Удаление сотрудника в БД по id невозможно")
     @Test
     public void deleteEmployeeById_Exception() {
@@ -147,11 +147,11 @@ public class EmployeeServiceImplTest {
         when(mockedRepository.getEmployeeWithHighestSalary())
                 .thenReturn(getListEmployeesForTest().get(2));
 
-        Employee expected = mockedRepository.getEmployeeWithHighestSalary();
-
-        Employee actual = getListEmployeesForTest().stream()
+        Employee expected = getListEmployeesForTest().stream()
                 .max(Comparator.comparingInt(Employee::getSalary))
                 .get();
+
+        Employee actual = out.getEmployeeWithHighestSalary().toEmployee();
 
         assertEquals(expected, actual);
         verify(mockedRepository, times(1)).getEmployeeWithHighestSalary();
@@ -163,14 +163,15 @@ public class EmployeeServiceImplTest {
     @Test
     public  void getEmployeesByPosition_NULL_position(){
         Position position = new Position(null);
-        when(mockedRepository.getEmployeesByPosition(position.getNamePosition()))
+        when(mockedRepository.findAllEmployees())
                 .thenReturn(getListEmployeesForTest());
+
         List<EmployeeDTO> expected = getListEmployeesForTest().stream()
                         .map(EmployeeDTO::fromEmployee)
                                 .collect(Collectors.toList());
-        List<EmployeeDTO> actual = mockedRepository.getEmployeesByPosition(position.getNamePosition())
-                        .stream().map(EmployeeDTO::fromEmployee)
-                .collect(Collectors.toList());
+
+        List<EmployeeDTO> actual = out.getEmployeesByPosition(position.getNamePosition());
+
         assertIterableEquals(expected, actual);
     }
 
@@ -178,19 +179,19 @@ public class EmployeeServiceImplTest {
     @Test
     public  void getEmployeesByPosition_OK(){
 
-        List<Employee> expected = getListEmployeesForTest().stream()
+        List<EmployeeDTO> expected = getListEmployeesForTest().stream()
                         .filter(employee -> employee.getPosition() == DIRECTOR)
+                        .map(EmployeeDTO::fromEmployee)
                                 .collect(Collectors.toList());
 
         when(mockedRepository.getEmployeesByPosition(DIRECTOR.getNamePosition()))
                 .thenReturn(List.of(
                         new Employee(1, "Anna", 120000, DIRECTOR)));
 
-        List<Employee> actual = mockedRepository.getEmployeesByPosition(DIRECTOR.getNamePosition());
+        List<EmployeeDTO> actual = out.getEmployeesByPosition(DIRECTOR.getNamePosition());
         assertIterableEquals(expected, actual);
     }
 
-//    Не уверена, что так правильно
     @DisplayName("Получение полной информации о сотруднике по id")
     @Test
     public void getEmployeeFullInfoById_OK(){
@@ -198,7 +199,6 @@ public class EmployeeServiceImplTest {
         when(mockedRepository.getEmployeeFullInfoById(1)).thenReturn(expected);
 
         assertEquals(expected, out.getEmployeeFullInfoById(1));
-//        EmployeeFullInfo employeeFullInfo = mockedRepository.getEmployeeFullInfoById(1);
         verify(mockedRepository, times(1)).getEmployeeFullInfoById(1);
     }
 
@@ -224,8 +224,6 @@ public class EmployeeServiceImplTest {
         List<Employee> actual= objectMapper.readValue(file.getInputStream(), new TypeReference<>() {});
         assertEquals(getListEmployeesForTest(), actual);
     }
-
-//    Правильная ли логика проверки работы метода?
 
     @DisplayName("Добавление в базу данных из файла списка сотрудников")
     @Test

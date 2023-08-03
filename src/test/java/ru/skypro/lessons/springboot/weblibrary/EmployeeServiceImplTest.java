@@ -104,8 +104,10 @@ public class EmployeeServiceImplTest {
     @DisplayName("Сотрудник в БД по id не найден")
     @Test
     public void getEmployeeById_Exception(){
-        when(mockedRepository.findById(2)).thenThrow(EmployeeNotFoundException.class);
+//        when(mockedRepository.findById(2)).thenThrow(EmployeeNotFoundException.class);
+
         assertThrows(EmployeeNotFoundException.class, () -> out.getEmployeeById(2));
+        verify(mockedRepository, times(1)).findById(2);
     }
 
     @DisplayName("Удаление сотрудника в БД по id")
@@ -138,9 +140,6 @@ public class EmployeeServiceImplTest {
         assertIterableEquals(getListEmployeesForTest(), list);
     }
 
-// В классе EmployeeServiceImpl данный метод возвращает EmployeeDTO.
-// Нужно ли было как-то в тесте задействовать маппинг в DTO и обратно?
-
     @DisplayName("Получение сотрудника с самой высокой зарплатой")
     @Test
     public void getEmployeeWithHighestSalary_OK(){
@@ -157,8 +156,7 @@ public class EmployeeServiceImplTest {
         verify(mockedRepository, times(1)).getEmployeeWithHighestSalary();
 
     }
-// В классе EmployeeServiceImpl данный метод возвращает EmployeeDTO.
-// Здесь решила использовать маппинг. Нужно ли было?
+
     @DisplayName("Получение списка сотрудников по должности, если должность null, то нужно вывести весь список сотрудников")
     @Test
     public  void getEmployeesByPosition_NULL_position(){

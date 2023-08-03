@@ -32,4 +32,5 @@ public class AppUser {
     public String correctUsername(String username){
         return StringUtils.capitalize(username.toLowerCase());
     }
+
 }

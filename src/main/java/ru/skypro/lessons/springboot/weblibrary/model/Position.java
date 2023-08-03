@@ -9,7 +9,9 @@ import java.util.Set;
 @Table(name = "position")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@ToString
+@Getter
+@Setter
 public class Position {
 
     @Id
@@ -31,4 +33,5 @@ public class Position {
         this.idPosition = idPosition;
         this.namePosition = namePosition;
     }
+
 }

@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -27,5 +28,18 @@ public class EmployeeFullInfo implements Serializable {
                 ", salary=" + salary +
                 ", positionName='" + positionName + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EmployeeFullInfo that = (EmployeeFullInfo) o;
+        return Objects.equals(name, that.name) && Objects.equals(salary, that.salary) && Objects.equals(positionName, that.positionName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, salary, positionName);
     }
 }

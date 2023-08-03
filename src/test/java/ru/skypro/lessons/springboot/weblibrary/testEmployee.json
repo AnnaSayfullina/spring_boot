@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "Anna",
+    "salary": 120000,
+    "position":
+        {"idPosition": 1,
+          "namePosition": "director"
+        }
+  },
+  {
+    "id": 2,
+    "name": "Mary",
+    "salary": 130000,
+    "position":
+        {"idPosition": 2,
+          "namePosition": "analyst"
+        }
+  },
+  {
+    "id": 3,
+    "name": "Mikel",
+    "salary": 140000,
+    "position":
+        {"idPosition": 2,
+        "namePosition": "analyst"
+          }
+  },
+  {
+    "id": 4,
+    "name": "Mikkkkel",
+    "salary": 140000,
+    "position":
+    {"idPosition": 2,
+      "namePosition": "analyst"
+    }
+  }
+]

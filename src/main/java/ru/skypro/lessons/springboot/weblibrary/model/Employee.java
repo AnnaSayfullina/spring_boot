@@ -7,8 +7,9 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "employee")
-@Data
 @AllArgsConstructor
+@Data
+
 public class Employee {
     @Id
     @Column(name = "id")
@@ -31,6 +32,7 @@ public class Employee {
         this.salary = salary;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -43,4 +45,5 @@ public class Employee {
     public int hashCode() {
         return Objects.hash(id);
     }
+
 }

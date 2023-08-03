@@ -33,11 +33,13 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public void addEmployee(EmployeeDTO employeeDTO) {
+    public EmployeeDTO addEmployee(EmployeeDTO employeeDTO) {
         logger.info("Вызван метод для создания и добавления сотрудника в базу данных {}", employeeDTO );
         Employee employee = employeeDTO.toEmployee();
         employeeRepository.save(employee);
         logger.debug("Сотрудник {} создан", employee);
+
+        return employeeDTO;
 
     }
 

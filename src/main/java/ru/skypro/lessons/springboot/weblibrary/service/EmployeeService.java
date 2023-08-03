@@ -16,7 +16,7 @@ public interface EmployeeService {
 //    Employee getEmployeeMinSalary();
 //    Employee getEmployeeMaxSalary();
 //    List<Employee> getEmployeesHighSalary();
-    void addEmployee(EmployeeDTO employeeDTO);
+    EmployeeDTO addEmployee(EmployeeDTO employeeDTO);
     void editEmployee(String name, Integer salary, int id);
     EmployeeDTO getEmployeeById(int id);
     void deleteEmployeeById (int id);

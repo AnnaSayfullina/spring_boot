@@ -135,3 +135,27 @@ Caused by: org.hibernate.tool.schema.spi.SchemaManagementException: Schema-valid
 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
 	... 20 common frames omitted
 23:56:53.439 [http-nio-8090-exec-2] ERROR r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник с id = 6 не найден
+00:56:38.076 [main] ERROR r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник с id = 2 не найден
+16:57:26.467 [http-nio-8090-exec-10] ERROR r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник с id = 1 не найден
+16:59:18.612 [http-nio-8090-exec-1] ERROR r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник с id = 1 не найден
+18:33:33.418 [main] ERROR r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник с id = 1 не найден
+18:43:21.986 [main] ERROR r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник с id = 1 не найден
+18:44:04.255 [main] ERROR r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник с id = 1 не найден
+22:12:59.348 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8090 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8090 or configure this application to listen on another port.
+
+00:01:53.033 [main] ERROR r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник с id = 2 не найден
+00:07:03.446 [main] ERROR r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник с id = 2 не найден
+00:13:29.901 [main] ERROR r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник с id = 2 не найден
+00:14:25.082 [main] ERROR r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник с id = 2 не найден

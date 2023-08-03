@@ -22,6 +22,8 @@ DROP TABLE employee;
 DROP TABLE position;
 DROP TABLE report;
 DROP TABLE app_user;
+DROP TABLE databasechangelog;
+DROP TABLE databasechangeloglock;
 
 
 SELECT * FROM report;

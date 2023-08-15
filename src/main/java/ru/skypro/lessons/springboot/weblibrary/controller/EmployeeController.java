@@ -28,8 +28,8 @@ public class EmployeeController {
      */
 
     @PostMapping("/")
-    public void addEmployee (@RequestBody EmployeeDTO employeeDTO){
-        employeeService.addEmployee(employeeDTO);
+    public EmployeeDTO addEmployee (@RequestBody EmployeeDTO employeeDTO){
+        return employeeService.addEmployee(employeeDTO);
     }
 
     /**
@@ -37,10 +37,10 @@ public class EmployeeController {
      * Он должен редактировать сотрудника с указанным id;
      */
     @PutMapping("{id}")
-    public void editEmployee(@RequestParam (value = "name", required = false) String name,
+    public EmployeeDTO editEmployee(@RequestParam (value = "name", required = false) String name,
                              @RequestParam (value = "salary", required = false) Integer salary,
                              @PathVariable("id") int id ) {
-        employeeService.editEmployee(name, salary, id);
+       return employeeService.editEmployee(name, salary, id);
     }
 
     /**

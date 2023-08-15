@@ -4,6 +4,8 @@ databaseChangeLog:
   - include:
       file: liquibase/changesets/create_employee.yml
   - include:
+      file: liquibase/changesets/create_foreign_key.yml
+  - include:
       file: liquibase/changesets/create_report.yml
   - include:
       file: liquibase/changesets/create_appUser.yml

@@ -36,15 +36,15 @@ public class EmployeeServiceImpl implements EmployeeService{
     public EmployeeDTO addEmployee(EmployeeDTO employeeDTO) {
         logger.info("Вызван метод для создания и добавления сотрудника в базу данных {}", employeeDTO );
         Employee employee = employeeDTO.toEmployee();
-        employeeRepository.save(employee);
+        Employee newEmployee = employeeRepository.save(employee);
         logger.debug("Сотрудник {} создан", employee);
 
-        return employeeDTO;
+        return EmployeeDTO.fromEmployee(newEmployee);
 
     }
 
     @Override
-    public void editEmployee(String name, Integer salary, int id) {
+    public EmployeeDTO editEmployee(String name, Integer salary, int id) {
         logger.info("Вызван метод для изменения сотрудника id = {}", id);
         EmployeeDTO employeeDTO = EmployeeDTO.fromEmployee(employeeRepository.findById(id)
                 .orElseThrow(() -> {
@@ -54,8 +54,9 @@ public class EmployeeServiceImpl implements EmployeeService{
         employeeDTO.setName(name);
         employeeDTO.setSalary(salary);
         Employee employee = employeeDTO.toEmployee();
-        employeeRepository.save(employee);
+        Employee newEmployee = employeeRepository.save(employee);
         logger.debug("Сотрудник с id={} изменен, обновленные данные сотрудника: {}", id, employee);
+        return EmployeeDTO.fromEmployee(newEmployee);
     }
 
     @Override

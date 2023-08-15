@@ -32,6 +32,11 @@ public class Employee {
         this.salary = salary;
     }
 
+    public Employee(String name, int salary, Position position) {
+        this.name = name;
+        this.salary = salary;
+        this.position = position;
+    }
 
     @Override
     public boolean equals(Object o) {

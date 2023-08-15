@@ -159,3 +159,92 @@ Identify and stop the process that's listening on port 8090 or configure this ap
 00:07:03.446 [main] ERROR r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник с id = 2 не найден
 00:13:29.901 [main] ERROR r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник с id = 2 не найден
 00:14:25.082 [main] ERROR r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник с id = 2 не найден
+14:15:37.358 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ОШИБКА: значение NULL в столбце "id_position" отношения "employee" нарушает ограничение NOT NULL
+  Подробности: Ошибочная строка содержит (5, Den, 200000, null).
+14:30:08.249 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ОШИБКА: значение NULL в столбце "id_position" отношения "employee" нарушает ограничение NOT NULL
+  Подробности: Ошибочная строка содержит (5, Den, 200000, null).
+17:41:54.530 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ОШИБКА: значение NULL в столбце "id_position" отношения "employee" нарушает ограничение NOT NULL
+  Подробности: Ошибочная строка содержит (5, Den, 200000, null).
+20:27:52.307 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ОШИБКА: значение NULL в столбце "id_position" отношения "employee" нарушает ограничение NOT NULL
+  Подробности: Ошибочная строка содержит (3, Mikel, 140000, null).
+20:29:15.803 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ОШИБКА: значение NULL в столбце "id_position" отношения "employee" нарушает ограничение NOT NULL
+  Подробности: Ошибочная строка содержит (3, Mikel, 140000, null).
+20:29:58.233 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ОШИБКА: значение NULL в столбце "id_position" отношения "employee" нарушает ограничение NOT NULL
+  Подробности: Ошибочная строка содержит (3, Mikel, 140000, null).
+20:32:29.714 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ОШИБКА: значение NULL в столбце "id_position" отношения "employee" нарушает ограничение NOT NULL
+  Подробности: Ошибочная строка содержит (3, Mikel, 140000, null).
+22:37:21.600 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ОШИБКА: значение NULL в столбце "id_position" отношения "employee" нарушает ограничение NOT NULL
+  Подробности: Ошибочная строка содержит (6, Mikel, 140000, null).
+22:38:32.314 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ОШИБКА: значение NULL в столбце "id_position" отношения "employee" нарушает ограничение NOT NULL
+  Подробности: Ошибочная строка содержит (7, Oleg, 10000, null).
+00:07:59.155 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ОШИБКА: значение NULL в столбце "id_position" отношения "employee" нарушает ограничение NOT NULL
+  Подробности: Ошибочная строка содержит (17, Mikel, 140000, null).
+14:08:35.671 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ОШИБКА: значение NULL в столбце "id_position" отношения "employee" нарушает ограничение NOT NULL
+  Подробности: Ошибочная строка содержит (26, Mikel, 140000, null).
+14:20:52.708 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ОШИБКА: значение NULL в столбце "id_position" отношения "employee" нарушает ограничение NOT NULL
+  Подробности: Ошибочная строка содержит (29, test_name, 10000, null).
+14:45:10.553 [main] ERROR r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник с id = 1 не найден
+15:08:57.331 [main] ERROR r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник с id = 1 не найден
+15:10:34.738 [main] ERROR r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник с id = 1 не найден
+15:26:24.140 [main] ERROR r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник с id = 1 не найден
+15:31:54.522 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8090 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8090 or configure this application to listen on another port.
+
+15:32:23.334 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8090 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8090 or configure this application to listen on another port.
+
+15:33:00.987 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8090 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8090 or configure this application to listen on another port.
+
+15:33:22.700 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8090 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8090 or configure this application to listen on another port.
+
+15:33:55.440 [main] ERROR r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник с id = 1 не найден
+15:36:32.279 [main] ERROR r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник с id = 1 не найден
+15:56:12.591 [main] ERROR r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник с id = 66 не найден
+16:03:31.502 [main] ERROR r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник с id = 72 не найден
+16:07:01.736 [main] ERROR r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник с id = 72 не найден

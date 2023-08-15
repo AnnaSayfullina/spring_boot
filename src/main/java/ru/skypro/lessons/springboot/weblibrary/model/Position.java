@@ -22,7 +22,7 @@ public class Position {
     @Column(name = "name_position")
     private String namePosition;
 
-    @OneToMany(mappedBy = "position", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "position", fetch = FetchType.EAGER, orphanRemoval = true)
     private Set<Employee> employees;
 
     public Position(String namePosition) {

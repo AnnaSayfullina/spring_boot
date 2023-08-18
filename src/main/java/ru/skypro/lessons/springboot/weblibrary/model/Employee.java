@@ -3,6 +3,7 @@ package ru.skypro.lessons.springboot.weblibrary.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
@@ -10,7 +11,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @Data
 
-public class Employee {
+public class Employee implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

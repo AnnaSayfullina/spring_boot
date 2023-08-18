@@ -52,16 +52,6 @@ public class EmployeeServiceImplTest {
         );
     }
 
-    private static List<Position> getPositionForTest(){
-        return List.of(
-                new Position(1,"director", Set.of(
-                        new Employee(1, "Anna", 120000, DIRECTOR))),
-                new Position(2,"analyst", Set.of(
-                        new Employee(2, "Mary", 130000, ANALYST),
-                        new Employee(3, "Mikel", 140000, ANALYST)))
-        );
-    }
-
     @DisplayName("Добавление сотрудника в БД")
     @Test
     public void addEmployee_OK(){
@@ -74,20 +64,20 @@ public class EmployeeServiceImplTest {
         verify(mockedRepository, times(1)).save(employeeDTO.toEmployee());
     }
 
-//    @DisplayName("Изменение сотрудника в БД")
-//    @Test
-//    public void editEmployee_OK(){
-//        Employee employee = new Employee(1,"Oleg", 100000, DIRECTOR);
-//        Employee expected = new Employee(1,"Anna", 200000, DIRECTOR);
-//
-//        when(mockedRepository.findById(1))
-//                .thenReturn(Optional.of(employee));
-//
-//        Employee actual = out.getEmployeeById(1).toEmployee();
-//        out.editEmployee(expected.getName(), expected.getSalary(), expected.getId());
-//
-//        assertEquals(expected, actual);
-//    }
+    @DisplayName("Изменение сотрудника в БД")
+    @Test
+    public void editEmployee_OK(){
+        Employee employee = new Employee(1,"Oleg", 100000, DIRECTOR);
+        Employee expected = new Employee(1,"Anna", 200000, DIRECTOR);
+
+        when(mockedRepository.findById(1))
+                .thenReturn(Optional.of(employee));
+
+        Employee actual = out.getEmployeeById(1).toEmployee();
+        out.editEmployee(expected.getName(), expected.getSalary(), expected.getId());
+
+        assertEquals(expected, actual);
+    }
 
 
     @DisplayName("Поиск сотрудника в БД по id")

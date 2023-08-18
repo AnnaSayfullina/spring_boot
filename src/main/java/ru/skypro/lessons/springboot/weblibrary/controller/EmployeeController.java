@@ -37,10 +37,10 @@ public class EmployeeController {
      * Он должен редактировать сотрудника с указанным id;
      */
     @PutMapping("{id}")
-    public EmployeeDTO editEmployee(@RequestParam (value = "name", required = false) String name,
-                             @RequestParam (value = "salary", required = false) Integer salary,
+    public void editEmployee(@RequestParam (value = "name", required = false) String name,
+                             @RequestParam (value = "salary", required = false) int salary,
                              @PathVariable("id") int id ) {
-       return employeeService.editEmployee(name, salary, id);
+       employeeService.editEmployee(name, salary, id);
     }
 
     /**
@@ -100,7 +100,7 @@ public class EmployeeController {
      Лимит на количество сотрудников на странице — 10 человек.
      */
     @GetMapping("/page")
-    public List<Employee> getEmployeesWithPaging(@RequestParam("page") int page){
+    public List<Employee> getEmployeesWithPaging(@RequestParam(value = "page", required = false, defaultValue= "0") int page){
         return employeeService.getEmployeesWithPaging(page);
     }
 

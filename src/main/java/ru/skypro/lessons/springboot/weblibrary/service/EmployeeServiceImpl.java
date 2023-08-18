@@ -17,6 +17,8 @@ import ru.skypro.lessons.springboot.weblibrary.repository.EmployeeRepository;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +46,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public EmployeeDTO editEmployee(String name, Integer salary, int id) {
+    public void editEmployee(String name, int salary, int id) {
         logger.info("Вызван метод для изменения сотрудника id = {}", id);
         EmployeeDTO employeeDTO = EmployeeDTO.fromEmployee(employeeRepository.findById(id)
                 .orElseThrow(() -> {
@@ -54,9 +56,9 @@ public class EmployeeServiceImpl implements EmployeeService{
         employeeDTO.setName(name);
         employeeDTO.setSalary(salary);
         Employee employee = employeeDTO.toEmployee();
-        Employee newEmployee = employeeRepository.save(employee);
+        employeeRepository.save(employee);
         logger.debug("Сотрудник с id={} изменен, обновленные данные сотрудника: {}", id, employee);
-        return EmployeeDTO.fromEmployee(newEmployee);
+
     }
 
     @Override
@@ -150,24 +152,32 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public void uploadFileWithEmployees(MultipartFile multipartFile) {
+    public void uploadFileWithEmployees(MultipartFile multipartFile){
         logger.info("Вызван метод для загрузки из файла списка сотрудников и сохранении его в базу данных");
 
-        File file = new File("newFile.json");
-
-        List<EmployeeDTO> employeesDTO =
-                null;
-        try {
-        Files.write(file.toPath(), multipartFile.getBytes());
-
         ObjectMapper objectMapper = new ObjectMapper();
-
-         employeesDTO = objectMapper.readValue(multipartFile.getInputStream(), new TypeReference<>() {});
+        List<EmployeeDTO> employeeDTO = null;
+        try {
+            employeeDTO =objectMapper.readValue(multipartFile.getInputStream(), new TypeReference<>() {});
         } catch (IOException e) {
             logger.error("Список сотрудников из файла в базу данных не добавлен", e);
-            throw new RuntimeException(e);
-        }
-        employeeRepository.saveAll(employeesDTO.stream().map(EmployeeDTO::toEmployee).toList());
+            throw new RuntimeException(e);        }
+        employeeRepository.saveAll(employeeDTO.stream().map(EmployeeDTO::toEmployee).toList());
+
+/////////
+//        File file = new File("newFile.json");
+//        List<EmployeeDTO> employeesDTO =
+//                null;
+//        try {
+//        Files.write(file.toPath(), multipartFile.getBytes());
+//
+//        ObjectMapper objectMapper = new ObjectMapper();
+//         employeesDTO = objectMapper.readValue(multipartFile.getInputStream(), new TypeReference<>() {});
+//        } catch (IOException e) {
+//            logger.error("Список сотрудников из файла в базу данных не добавлен", e);
+//            throw new RuntimeException(e);
+//        }
+//        employeeRepository.saveAll(employeesDTO.stream().map(EmployeeDTO::toEmployee).toList());
 
         logger.debug("Список сотрудников добавлен в базу");
 

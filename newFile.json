@@ -1,1 +1,29 @@
-[{"id":1,"name":"Anna","salary":120000,"position":{"idPosition":1,"namePosition":"director","employees":null}},{"id":2,"name":"Mary","salary":130000,"position":{"idPosition":2,"namePosition":"analyst","employees":null}},{"id":3,"name":"Mikel","salary":140000,"position":{"idPosition":2,"namePosition":"analyst","employees":null}}]
+[
+  {
+    "id": 0,
+    "name": "Ivan",
+    "salary": 95000,
+    "positionDTO": {
+      "idPosition": 1,
+      "namePosition": "analyst"
+  }
+  },
+  {
+    "id": 0,
+    "name": "Ivann3",
+    "salary": 200000,
+    "positionDTO": {
+      "idPosition": 1,
+      "namePosition": "analyst"
+  }
+  },
+{
+  "id": 0,
+  "name": "aaaaaaa",
+  "salary": 55555,
+  "positionDTO": {
+    "idPosition": 1,
+    "namePosition": "analyst"
+  }
+}
+]

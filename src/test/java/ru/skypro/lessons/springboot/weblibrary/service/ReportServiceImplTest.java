@@ -1,4 +1,4 @@
-package ru.skypro.lessons.springboot.weblibrary;
+package ru.skypro.lessons.springboot.weblibrary.service;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;

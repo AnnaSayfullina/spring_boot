@@ -18,15 +18,20 @@ public class EmployeeDTO implements Serializable {
     private Integer id;
     private String name;
     private Integer salary;
-    private Position position;
+    private PositionDTO positionDTO;
 
+    public EmployeeDTO(String name, Integer salary, PositionDTO positionDTO) {
+        this.name = name;
+        this.salary = salary;
+        this.positionDTO = positionDTO;
+    }
 
     public static EmployeeDTO fromEmployee(Employee employee) {
         EmployeeDTO employeeDTO = new EmployeeDTO();
         employeeDTO.setId(employee.getId());
         employeeDTO.setName(employee.getName());
         employeeDTO.setSalary(employee.getSalary());
-        employeeDTO.setPosition(employee.getPosition());
+        employeeDTO.setPositionDTO(PositionDTO.fromPosition(employee.getPosition()));
         return employeeDTO;
     }
 
@@ -35,7 +40,7 @@ public class EmployeeDTO implements Serializable {
         employee.setId(this.getId());
         employee.setName(this.getName());
         employee.setSalary(this.getSalary());
-        employee.setPosition(this.getPosition());
+        employee.setPosition(this.getPositionDTO().toPosition());
         return employee;
     }
 
@@ -44,12 +49,12 @@ public class EmployeeDTO implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         EmployeeDTO that = (EmployeeDTO) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(salary, that.salary) && Objects.equals(position, that.position);
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(salary, that.salary) && Objects.equals(positionDTO, that.positionDTO);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, salary, position);
+        return Objects.hash(id, name, salary, positionDTO);
     }
 
     @Override
@@ -58,6 +63,7 @@ public class EmployeeDTO implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", salary=" + salary +
+                ", positionDTO=" + positionDTO +
                 '}';
     }
 }

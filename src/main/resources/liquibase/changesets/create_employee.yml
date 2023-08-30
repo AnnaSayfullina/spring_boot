@@ -23,10 +23,3 @@ databaseChangeLog:
                   type: int
                   constraints:
                     nullable: false
-              - column:
-                  name: id_position
-                  type: int
-                  constraints:
-                      foreignKeyName: id_position
-                      references: position(id_position)
-                      nullable: false

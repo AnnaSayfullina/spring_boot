@@ -1,4 +1,4 @@
-package ru.skypro.lessons.springboot.weblibrary;
+package ru.skypro.lessons.springboot.weblibrary.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -44,7 +44,7 @@ public class EmployeeServiceImplTest {
     private final static Position DIRECTOR = new Position(1,"director");
     private final static Position ANALYST = new Position(2,"analyst");
 
-    private static List<Employee> getListEmployeesForTest() {
+    public static List<Employee> getListEmployeesForTest() {
         return List.of(
                 new Employee(1, "Anna", 120000, DIRECTOR),
                 new Employee(2, "Mary", 130000, ANALYST),
@@ -52,20 +52,12 @@ public class EmployeeServiceImplTest {
         );
     }
 
-    private static List<Position> getPositionForTest(){
-        return List.of(
-                new Position(1,"director", Set.of(
-                        new Employee(1, "Anna", 120000, DIRECTOR))),
-                new Position(2,"analyst", Set.of(
-                        new Employee(2, "Mary", 130000, ANALYST),
-                        new Employee(3, "Mikel", 140000, ANALYST)))
-        );
-    }
-
     @DisplayName("Добавление сотрудника в БД")
     @Test
     public void addEmployee_OK(){
         Employee expectedEmployee = new Employee(4,"Oleg", 100000, ANALYST);
+        when(mockedRepository.save(expectedEmployee))
+                .thenReturn(expectedEmployee);
         EmployeeDTO employeeDTO = out.addEmployee(EmployeeDTO.fromEmployee(expectedEmployee));
         Employee actualEmployee = employeeDTO.toEmployee();
         assertEquals(expectedEmployee, actualEmployee);

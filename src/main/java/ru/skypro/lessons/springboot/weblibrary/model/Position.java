@@ -8,7 +8,6 @@ import java.util.Set;
 @Entity
 @Table(name = "position")
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
 @Getter
 @Setter
@@ -22,8 +21,6 @@ public class Position {
     @Column(name = "name_position")
     private String namePosition;
 
-    @OneToMany(mappedBy = "position", fetch = FetchType.EAGER)
-    private Set<Employee> employees;
 
     public Position(String namePosition) {
         this.namePosition = namePosition;

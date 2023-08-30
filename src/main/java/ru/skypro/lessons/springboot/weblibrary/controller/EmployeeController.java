@@ -28,8 +28,8 @@ public class EmployeeController {
      */
 
     @PostMapping("/")
-    public void addEmployee (@RequestBody EmployeeDTO employeeDTO){
-        employeeService.addEmployee(employeeDTO);
+    public EmployeeDTO addEmployee (@RequestBody EmployeeDTO employeeDTO){
+        return employeeService.addEmployee(employeeDTO);
     }
 
     /**
@@ -38,9 +38,9 @@ public class EmployeeController {
      */
     @PutMapping("{id}")
     public void editEmployee(@RequestParam (value = "name", required = false) String name,
-                             @RequestParam (value = "salary", required = false) Integer salary,
+                             @RequestParam (value = "salary", required = false) int salary,
                              @PathVariable("id") int id ) {
-        employeeService.editEmployee(name, salary, id);
+       employeeService.editEmployee(name, salary, id);
     }
 
     /**
@@ -100,7 +100,7 @@ public class EmployeeController {
      Лимит на количество сотрудников на странице — 10 человек.
      */
     @GetMapping("/page")
-    public List<Employee> getEmployeesWithPaging(@RequestParam("page") int page){
+    public List<Employee> getEmployeesWithPaging(@RequestParam(value = "page", required = false, defaultValue= "0") int page){
         return employeeService.getEmployeesWithPaging(page);
     }
 

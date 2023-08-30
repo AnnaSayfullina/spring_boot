@@ -3,6 +3,7 @@ package ru.skypro.lessons.springboot.weblibrary.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
@@ -10,7 +11,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @Data
 
-public class Employee {
+public class Employee implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,6 +33,11 @@ public class Employee {
         this.salary = salary;
     }
 
+    public Employee(String name, int salary, Position position) {
+        this.name = name;
+        this.salary = salary;
+        this.position = position;
+    }
 
     @Override
     public boolean equals(Object o) {

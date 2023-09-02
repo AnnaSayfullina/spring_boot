@@ -1,4 +1,5 @@
 package ru.skypro.lessons.springboot.weblibrary.controller;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;
@@ -10,14 +11,21 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
+import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 import ru.skypro.lessons.springboot.weblibrary.dto.EmployeeDTO;
 import ru.skypro.lessons.springboot.weblibrary.dto.PositionDTO;
 import ru.skypro.lessons.springboot.weblibrary.model.Employee;
 import ru.skypro.lessons.springboot.weblibrary.model.Position;
 import ru.skypro.lessons.springboot.weblibrary.repository.EmployeeRepository;
 
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -28,18 +36,39 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-
+@Testcontainers
 public class EmployeeControllerTest {
+
+    @Container
+    private static final PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:13")
+            .withUsername("postgres")
+            .withPassword("Anna_098!");
 
     @Autowired
     private MockMvc mockMvc;
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    @DynamicPropertySource
+    static void postgresProperties(DynamicPropertyRegistry registry) {
+        registry.add("spring.datasource.url", postgres::getJdbcUrl);
+        registry.add("spring.datasource.username", postgres::getUsername);
+        registry.add("spring.datasource.password", postgres::getPassword);
+    }
+
+    @Autowired
+    private DataSource dataSource;
+
     @BeforeEach
     public void cleanData(){
         employeeRepository.deleteAll();
+    }
+
+    @Test
+    void testPostgresql() throws SQLException {
+        try (Connection conn = dataSource.getConnection()) {
+            assertThat(conn).isNotNull();
+        }
     }
 
     void addEmployeeListInRepository() {

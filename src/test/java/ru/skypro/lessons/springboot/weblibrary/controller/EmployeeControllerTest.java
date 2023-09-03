@@ -39,10 +39,10 @@ public class EmployeeControllerTest {
     public void cleanData(){
         employeeRepository.deleteAll();
     }
-    @AfterEach
-    public void cleanDataBase() {
-        employeeRepository.deleteAll();
-    }
+//    @AfterEach
+//    public void cleanDataBase() {
+//        employeeRepository.deleteAll();
+//    }
 
     void addEmployeeListInRepository() {
         Position director = new Position("director");

@@ -21,7 +21,7 @@ public class Employee implements Serializable {
     @Column(name = "salary")
     private int salary;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_position")
     private Position position;
 

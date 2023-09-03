@@ -2,6 +2,7 @@ package ru.skypro.lessons.springboot.weblibrary.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.skypro.lessons.springboot.weblibrary.dto.EmployeeDTO;
 import ru.skypro.lessons.springboot.weblibrary.dto.PositionDTO;
@@ -28,8 +28,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-
 public class EmployeeControllerTest {
 
     @Autowired
@@ -41,6 +39,10 @@ public class EmployeeControllerTest {
     public void cleanData(){
         employeeRepository.deleteAll();
     }
+//    @AfterEach
+//    public void cleanDataBase() {
+//        employeeRepository.deleteAll();
+//    }
 
     void addEmployeeListInRepository() {
         Position director = new Position("director");

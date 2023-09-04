@@ -1,4 +1,5 @@
 package ru.skypro.lessons.springboot.weblibrary.controller;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;
@@ -10,7 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.skypro.lessons.springboot.weblibrary.dto.EmployeeDTO;
 import ru.skypro.lessons.springboot.weblibrary.dto.PositionDTO;
@@ -18,6 +20,9 @@ import ru.skypro.lessons.springboot.weblibrary.model.Employee;
 import ru.skypro.lessons.springboot.weblibrary.model.Position;
 import ru.skypro.lessons.springboot.weblibrary.repository.EmployeeRepository;
 
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -28,8 +33,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-
 public class EmployeeControllerTest {
 
     @Autowired
@@ -64,8 +67,6 @@ public class EmployeeControllerTest {
                 .limit(13)
                 .toList();
     }
-
-
 
     @Test
     @WithMockUser(username = "admin", password = "admin", roles = "ADMIN")
@@ -120,7 +121,7 @@ public class EmployeeControllerTest {
     @WithMockUser(username = "admin", password = "admin", roles = "ADMIN")
     void editEmployeeTest() throws Exception {
 
-        int id = addEmployeeInRepository().getId();
+//        int id = addEmployeeInRepository().getId();
 //        JSONObject position = new JSONObject();
 //        position.put("namePosition", "position_new");
 //
@@ -131,18 +132,19 @@ public class EmployeeControllerTest {
 //
 //        jsonEmployee.put("positionDTO", position);
 
-        mockMvc.perform(put("/employees/{id}", id)
-                  .param("name", "Oleg")
-                  .param("salary", "300000"))
+        addEmployeeListInRepository();
+
+        int idUpdate = employeeRepository.findIdByName("Anna");
+        mockMvc.perform(put("/employees/{id}", idUpdate)
+                        .param("name", "Oleg")
+                        .param("salary", "300000"))
                 .andExpect(status().isOk());
 
-        mockMvc.perform(get("/employees/all"))
+        mockMvc.perform(get("/employees/{id}", idUpdate))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$").isArray())
-                .andExpect(jsonPath("$[0].name").value("Oleg"))
-                .andExpect(jsonPath("$[0].salary").value("300000"));
-        
-        int anotherId = 3;
+                .andExpect(jsonPath("$.name").value("Oleg"));
+
+        int anotherId = 150;
 
         mockMvc.perform(put("/employees/{id}", anotherId)
                         .param("name", "Oleg")
@@ -158,10 +160,9 @@ public class EmployeeControllerTest {
 
         mockMvc.perform(get("/employees/{id}", id))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.name").value("Ivan"));
 
-        int anotherId = 3;
+        int anotherId = 153;
 
         mockMvc.perform(get("/employees/{id}", anotherId))
                 .andExpect(status().isNotFound());
@@ -173,7 +174,9 @@ public class EmployeeControllerTest {
 
         addEmployeeListInRepository();
 
-        mockMvc.perform(delete("/employees/{id}", 1))
+        int idUpdate = employeeRepository.findIdByName("Anna");
+
+        mockMvc.perform(delete("/employees/{id}", idUpdate))
                 .andExpect(status().isOk());
 
         mockMvc.perform(get("/employees/all"))
@@ -181,7 +184,7 @@ public class EmployeeControllerTest {
                 .andExpect(jsonPath("$").isArray())
                 .andExpect(jsonPath("$.length()").value(2));
 
-        int anotherId = 4;
+        int anotherId = 154;
 
         mockMvc.perform(delete("/employees/{id}", anotherId))
                 .andExpect(status().isNotFound());
@@ -193,9 +196,11 @@ public class EmployeeControllerTest {
 
         addEmployeeListInRepository();
 
+        int id = employeeRepository.findIdByName("Mikel");
+
         mockMvc.perform(get("/employees/withHighestSalary"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(3))
+                .andExpect(jsonPath("$.id").value(id))
                 .andExpect(jsonPath("$.name").value("Mikel"));
     }
 
@@ -219,7 +224,9 @@ public class EmployeeControllerTest {
 
         addEmployeeListInRepository();
 
-        mockMvc.perform(get("/employees/{id}/fullInfo", 3))
+        int id = employeeRepository.findIdByName("Mikel");
+
+        mockMvc.perform(get("/employees/{id}/fullInfo", id))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Mikel"))
                 .andExpect(jsonPath("$.positionName").value("analyst"));

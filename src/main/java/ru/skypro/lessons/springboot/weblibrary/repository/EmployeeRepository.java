@@ -29,4 +29,8 @@ public interface EmployeeRepository extends CrudRepository<Employee, Integer>, P
     @Query(value = "SELECT * FROM employee WHERE salary = (SELECT MAX(salary) from employee)",
     nativeQuery = true)
     Employee getEmployeeWithHighestSalary();
+
+    @Query(value = "SELECT id FROM Employee WHERE name = :name",
+            nativeQuery = true)
+    int findIdByName(@Param("name") String name);
 }

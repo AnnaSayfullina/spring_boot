@@ -5217,3 +5217,122 @@ com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException: Unrecognized f
 01:20:14.921 [main] ERROR r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник с id = 3 не найден
 01:20:49.722 [main] ERROR r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник с id = 3 не найден
 01:21:18.641 [main] ERROR r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник с id = 4 не найден
+23:17:19.751 [main] ERROR r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник с id = 154 не найден
+23:17:19.778 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ERROR: null value in column "id_position" of relation "employee" violates not-null constraint
+  Подробности: Failing row contains (8, Mikel, 140000, null).
+23:17:19.817 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ERROR: null value in column "id_position" of relation "employee" violates not-null constraint
+  Подробности: Failing row contains (8, Mikel, 140000, null).
+23:17:19.842 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ERROR: null value in column "id_position" of relation "employee" violates not-null constraint
+  Подробности: Failing row contains (8, Mikel, 140000, null).
+23:17:19.864 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ERROR: null value in column "id_position" of relation "employee" violates not-null constraint
+  Подробности: Failing row contains (8, Mikel, 140000, null).
+23:17:19.889 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ERROR: null value in column "id_position" of relation "employee" violates not-null constraint
+  Подробности: Failing row contains (8, Mikel, 140000, null).
+23:17:19.911 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ERROR: null value in column "id_position" of relation "employee" violates not-null constraint
+  Подробности: Failing row contains (8, Mikel, 140000, null).
+23:17:19.931 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ERROR: null value in column "id_position" of relation "employee" violates not-null constraint
+  Подробности: Failing row contains (8, Mikel, 140000, null).
+23:17:19.952 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ERROR: null value in column "id_position" of relation "employee" violates not-null constraint
+  Подробности: Failing row contains (8, Mikel, 140000, null).
+23:17:19.969 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ERROR: null value in column "id_position" of relation "employee" violates not-null constraint
+  Подробности: Failing row contains (8, Mikel, 140000, null).
+23:17:19.985 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ERROR: null value in column "id_position" of relation "employee" violates not-null constraint
+  Подробности: Failing row contains (8, Mikel, 140000, null).
+23:19:41.652 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ERROR: null value in column "id_position" of relation "employee" violates not-null constraint
+  Подробности: Failing row contains (1, Kirill, 12000, null).
+23:19:41.714 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ERROR: null value in column "id_position" of relation "employee" violates not-null constraint
+  Подробности: Failing row contains (2, Anna, 120000, null).
+23:19:41.739 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ERROR: null value in column "id_position" of relation "employee" violates not-null constraint
+  Подробности: Failing row contains (3, Anna, 120000, null).
+23:19:41.759 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ERROR: null value in column "id_position" of relation "employee" violates not-null constraint
+  Подробности: Failing row contains (4, Kirill, 12000, null).
+23:19:41.788 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ERROR: null value in column "id_position" of relation "employee" violates not-null constraint
+  Подробности: Failing row contains (5, Anna, 120000, null).
+23:19:41.826 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ERROR: null value in column "id_position" of relation "employee" violates not-null constraint
+  Подробности: Failing row contains (6, test_name, 10000, null).
+23:19:41.844 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ERROR: null value in column "id_position" of relation "employee" violates not-null constraint
+  Подробности: Failing row contains (7, Anna, 120000, null).
+23:19:41.866 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ERROR: null value in column "id_position" of relation "employee" violates not-null constraint
+  Подробности: Failing row contains (8, Anna, 120000, null).
+23:19:41.887 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ERROR: null value in column "id_position" of relation "employee" violates not-null constraint
+  Подробности: Failing row contains (9, Ivan, 100000, null).
+23:19:41.909 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ERROR: null value in column "id_position" of relation "employee" violates not-null constraint
+  Подробности: Failing row contains (10, Kirill, 12000, null).
+23:19:42.015 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ERROR: null value in column "id_position" of relation "employee" violates not-null constraint
+  Подробности: Failing row contains (11, Anna, 120000, null).
+23:30:20.817 [main] ERROR r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник с id = 154 не найден
+23:30:20.849 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ERROR: null value in column "id_position" of relation "employee" violates not-null constraint
+  Подробности: Failing row contains (8, Mikel, 140000, null).
+23:30:20.886 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ERROR: null value in column "id_position" of relation "employee" violates not-null constraint
+  Подробности: Failing row contains (8, Mikel, 140000, null).
+23:30:20.913 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ERROR: null value in column "id_position" of relation "employee" violates not-null constraint
+  Подробности: Failing row contains (8, Mikel, 140000, null).
+23:30:20.932 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ERROR: null value in column "id_position" of relation "employee" violates not-null constraint
+  Подробности: Failing row contains (8, Mikel, 140000, null).
+23:30:20.953 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ERROR: null value in column "id_position" of relation "employee" violates not-null constraint
+  Подробности: Failing row contains (8, Mikel, 140000, null).
+23:30:20.975 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ERROR: null value in column "id_position" of relation "employee" violates not-null constraint
+  Подробности: Failing row contains (8, Mikel, 140000, null).
+23:30:20.993 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ERROR: null value in column "id_position" of relation "employee" violates not-null constraint
+  Подробности: Failing row contains (8, Mikel, 140000, null).
+23:30:21.014 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ERROR: null value in column "id_position" of relation "employee" violates not-null constraint
+  Подробности: Failing row contains (8, Mikel, 140000, null).
+23:30:21.033 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ERROR: null value in column "id_position" of relation "employee" violates not-null constraint
+  Подробности: Failing row contains (8, Mikel, 140000, null).
+23:30:21.052 [main] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - ERROR: null value in column "id_position" of relation "employee" violates not-null constraint
+  Подробности: Failing row contains (8, Mikel, 140000, null).
+23:55:14.446 [main] ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: Validation Failed:
+     1 changesets check sum
+          liquibase/changesets/create_foreign_key.yml::3::Anna was: 8:4d9240572a21413ff583e39f14ff1329 but is now: 8:063805b6f396e92a3d00f6979cfa123a
+
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1770)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:598)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:313)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1156)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:931)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:608)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:733)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:435)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294)
+	at ru.skypro.lessons.springboot.weblibrary.WebLibraryApplication.main(WebLibraryApplication.java:10)
+Caused by: liquibase.exception.ValidationFailedException: Validation Failed:
+     1 changesets check sum
+          liquibase/changesets/create_foreign_key.yml::3::Anna was: 8:4d9240572a21413ff583e39f14ff1329 but is now: 8:063805b6f396e92a3d00f6979cfa123a
+
+	at liquibase.changelog.DatabaseChangeLog.validate(DatabaseChangeLog.java:357)
+	at liquibase.Liquibase$16.run(Liquibase.java:2296)
+	at liquibase.Scope.lambda$child$0(Scope.java:187)
+	at liquibase.Scope.child(Scope.java:196)
+	at liquibase.Scope.child(Scope.java:186)
+	at liquibase.Scope.child(Scope.java:165)
+	at liquibase.Liquibase.runInScope(Liquibase.java:2639)
+	at liquibase.Liquibase.listUnrunChangeSets(Liquibase.java:2286)
+	at liquibase.Liquibase.isUpToDateFastCheck(Liquibase.java:506)
+	at liquibase.Liquibase.lambda$update$1(Liquibase.java:237)
+	at liquibase.Scope.lambda$child$0(Scope.java:187)
+	at liquibase.Scope.child(Scope.java:196)
+	at liquibase.Scope.child(Scope.java:186)
+	at liquibase.Scope.child(Scope.java:165)
+	at liquibase.Liquibase.runInScope(Liquibase.java:2639)
+	at liquibase.Liquibase.update(Liquibase.java:236)
+	at liquibase.Liquibase.update(Liquibase.java:221)
+	at liquibase.integration.spring.SpringLiquibase.performUpdate(SpringLiquibase.java:329)
+	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:284)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1816)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766)
+	... 18 common frames omitted
+00:05:29.602 [main] ERROR r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник с id = 154 не найден
+00:05:30.158 [main] ERROR r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник с id = 153 не найден
+00:11:05.583 [main] ERROR r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник с id = 154 не найден
+00:11:06.093 [main] ERROR r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник с id = 153 не найден
+00:11:06.377 [main] ERROR r.s.l.s.w.s.EmployeeServiceImpl - Сотрудник с id = 150 не найден

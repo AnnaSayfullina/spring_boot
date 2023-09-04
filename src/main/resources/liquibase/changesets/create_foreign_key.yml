@@ -10,7 +10,7 @@ databaseChangeLog:
                   name: id_position
                   type: integer
                   constraints:
-                    nullable: false
+                    nullable: true
               - addForeignKeyConstraint:
                   baseTableName: employee
                   baseColumnNames: id_position

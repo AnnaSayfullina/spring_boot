@@ -22,6 +22,7 @@ public class Position {
     private String namePosition;
 
 
+
     public Position(String namePosition) {
         this.namePosition = namePosition;
     }
